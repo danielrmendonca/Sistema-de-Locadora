@@ -8,19 +8,22 @@ using namespace web::http;
 using namespace web::http::experimental::listener;
 
 int main() {
+    // Carrega os usuários do arquivo antes de iniciar o servidor
+    inicializar_usuarios();
+
     http_listener listener(U("http://localhost:8080"));
 
     listener.support(methods::POST, [](const http_request& request) {
         if (request.relative_uri().path() == U("/usuario")) {
             criar_usuario(request);
         }
-        });
+    });
 
     listener.support(methods::GET, [](const http_request& request) {
         if (request.relative_uri().path() == U("/usuario")) {
             listar_usuarios(request);
         }
-        });
+    });
 
     listener.support(methods::PATCH, [](const http_request& request) {
         auto path = uri::split_path(request.relative_uri().path());
@@ -31,7 +34,7 @@ int main() {
         else {
             request.reply(status_codes::BadRequest, "Formato da URL incorreto");
         }
-        });
+    });
 
     listener.support(methods::DEL, [](const http_request& request) {
         auto path = uri::split_path(request.relative_uri().path());
@@ -42,7 +45,7 @@ int main() {
         else {
             request.reply(status_codes::BadRequest, "Formato da URL incorreto");
         }
-        });
+    });
 
     try {
         listener
