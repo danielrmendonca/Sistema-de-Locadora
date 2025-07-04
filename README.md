@@ -133,12 +133,12 @@ O sistema foi projetado para oferecer as seguintes funcionalidades principais: a
 
 - Na raiz do back rodar:
 
-- - mkdir build
+-  mkdir build
 
-- - cd build
+-  cd build
 
-- - em /build
+-  em /build
 
-- - cmake ..
+-  cmake ..
 
-- -cmake --build .
+-  cmake --build .
