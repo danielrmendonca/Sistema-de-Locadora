@@ -14,7 +14,7 @@ O "ACInsta em Casa" é uma plataforma digital desenvolvida para otimizar a loca�
 ## 🖊️ Requisitos
 O sistema foi projetado para oferecer as seguintes funcionalidades principais: a locação de múltiplos filmes de diversos gêneros e o acompanhamento online do status do aluguel, permitindo ao usuário verificar o tempo restante para a devolução de cada item.
 
-<br>Emo
+<br>
 
 ## 🧬 Elementos do Modelo ER
 
@@ -27,37 +27,38 @@ O sistema foi projetado para oferecer as seguintes funcionalidades principais: a
 - **Genero** - Genero que estão cadastrados na plataforma (Ex: Terror, Comédia...).
 - **Aluguel** - Se está alugado ou não o filme.
 
+<br>
+
 ### 🧱 Atributos
-### 🧱 Atributos
-Entidade "Usuário":
+**Entidade** "Usuário":
 
 - Atributos: E-mail, Nome, Gênero, Telefone (multivalorado), Senha, CPF, Data de Nascimento, Endereço (Composto - Bairro, Rua, CEP, Cidade).
 
-Entidade "Empregado":
+**Entidade** "Empregado":
 
 - Atributos: Posição, Data de Admissão, Salário, Data de Demissão.
 
-Entidade "Cliente":
+**Entidade** "Cliente":
 
 - Atributos: Data de Criação (Conta), Limite de Crédito.
 
-Entidade "Empresa":
+**Entidade** "Empresa":
 
 - Atributos: E-mail, CNPJ, Telefones, Nome, Endereço (Composto - Bairro, Rua, CEP, Cidade), Site.
 
-Entidade "Mídia":
+**Entidade** "Mídia":
 
 - Atributos: ID, Diretor, Título, Tempo, Nota, Data, Classificação Etária, Data de Lançamento, Dublado, Legendado.
 
-Entidade "Gênero":
+**Entidade** "Gênero":
 
 - Atributos: ID, Gênero (ou Nome do Gênero).
 
-Entidade "Mídia_Gênero" (Tabela de Ligação):
+**Entidade** "Mídia_Gênero" (Tabela de Ligação):
 
 - Atributos: ID_Mídia, ID_Gênero.
 
-Entidade "Aluguel":
+**Entidade** "Aluguel":
 
 - Atributos: ID, ID_Mídia, ID_Usuário, Data de Aluguel, Data de Devolução, Preço.
 
