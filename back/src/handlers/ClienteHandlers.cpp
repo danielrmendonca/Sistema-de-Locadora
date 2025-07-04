@@ -8,6 +8,7 @@
 std::vector<Cliente> clientes;
 std::mutex clientes_mutex;
 
+// Função responsável por carregar nosso arquivo que contem os dados de cliente
 bool carregar_clientes() {
     std::ifstream arquivo("cliente.txt");
     if (!arquivo.is_open()) return false;
@@ -36,7 +37,7 @@ bool carregar_clientes() {
     }
     return true;
 }
-
+// Função responsável por salvar no .xtt os dados do cliente que estamos cadastrando
 bool salvar_clientes() {
     std::ofstream arquivo("cliente.txt");
     if (!arquivo.is_open()) return false;
@@ -51,7 +52,7 @@ bool salvar_clientes() {
     }
     return true;
 }
-
+// Funlção que verifica se ha clientes cadastrados ou não no arquivo
 void inicializar_clientes() {
     std::lock_guard<std::mutex> lock(clientes_mutex);
     if (carregar_clientes()) {
@@ -60,7 +61,7 @@ void inicializar_clientes() {
         std::cout << "Nenhum cliente encontrado no arquivo.\n";
     }
 }
-
+// Função responsável por fazer o cadastro do cliente ao chamar uma rota do tipo POST e com os parametros necessarios sendo passados no Body da requisição
 void criar_cliente(const web::http::http_request& request) {
     request.extract_json().then([=](const web::json::value& json) {
         if (!json.has_field(U("usuario_id")) ||
@@ -97,7 +98,7 @@ void criar_cliente(const web::http::http_request& request) {
         request.reply(web::http::status_codes::Created, U("Cliente cadastrado com sucesso"));
     }).wait();
 }
-
+// Função que lista todos os clientes
 void listar_clientes(const web::http::http_request& request) {
     std::lock_guard<std::mutex> lock(clientes_mutex);
     web::json::value resposta = web::json::value::array();
@@ -110,7 +111,7 @@ void listar_clientes(const web::http::http_request& request) {
     }
     request.reply(web::http::status_codes::OK, resposta);
 }
-
+// Função responsável por atualizar um determinado cliente, buscando o cliente pelo id
 void atualizar_cliente(const web::http::http_request& request, int usuario_id) {
     request.extract_json().then([=](const web::json::value& json) {
         std::lock_guard<std::mutex> lock(clientes_mutex);
@@ -133,7 +134,7 @@ void atualizar_cliente(const web::http::http_request& request, int usuario_id) {
         }
     }).wait();
 }
-
+// Função que deleta um cliente
 void deletar_cliente(const web::http::http_request& request, int usuario_id) {
     std::lock_guard<std::mutex> lock(clientes_mutex);
     auto it = std::remove_if(clientes.begin(), clientes.end(),

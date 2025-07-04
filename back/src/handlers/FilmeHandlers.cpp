@@ -12,6 +12,8 @@ std::vector<Filme> filmes;
 int next_filme_id = 1;
 std::mutex filme_mutex;
 
+// Função que verifica se ha filmes cadastrados ou não no arquivo
+
 void inicializar_filmes() {
     if (!carregar_filmes()) {
         filmes.clear();
@@ -20,6 +22,7 @@ void inicializar_filmes() {
     }
 }
 
+// Função responsável por carregar nosso arquivo que contem os dados de filmes
 bool carregar_filmes() {
     std::ifstream file("filmes.txt");
     if (!file.is_open()) return false;
@@ -65,8 +68,10 @@ bool carregar_filmes() {
     return true;
 }
 
+// Função responsável por salvar no .txt os dados do filme que estamos cadastrando
+
 bool salvar_filmes() {
-    // Removi o lock_guard daqui!
+
     json::value jsonArray = json::value::array();
 
     for (size_t i = 0; i < filmes.size(); i++) {
@@ -93,6 +98,7 @@ bool salvar_filmes() {
     return true;
 }
 
+// Função responsável por fazer o cadastro do filme ao chamar uma rota do tipo POST e com os parametros necessarios sendo passados no Body da requisição
 void criar_filme(const http_request& request) {
     request.extract_json().then([&request](json::value jsonBody) {
         try {
@@ -132,6 +138,8 @@ void criar_filme(const http_request& request) {
     }).wait();
 }
 
+// Função que lista todos os filmes
+
 void listar_filmes(const http_request& request) {
     json::value jsonArray = json::value::array();
 
@@ -155,6 +163,7 @@ void listar_filmes(const http_request& request) {
     request.reply(status_codes::OK, jsonArray);
 }
 
+// Função para atualizar o filme
 void atualizar_filme(const http_request& request, int id) {
     request.extract_json().then([id, &request](json::value jsonBody) {
         if (!jsonBody.has_field(U("dublado")) || !jsonBody.has_field(U("legendado")) ||
@@ -201,6 +210,7 @@ void atualizar_filme(const http_request& request, int id) {
     }).wait();
 }
 
+// Função para deletar um filme
 void deletar_filme(const http_request& request, int id) {
     std::lock_guard<std::mutex> lock(filme_mutex);
     auto it = std::remove_if(filmes.begin(), filmes.end(),

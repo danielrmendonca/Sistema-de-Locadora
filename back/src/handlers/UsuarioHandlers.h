@@ -8,6 +8,7 @@
 extern std::vector<Usuario> usuarios;
 extern int next_id;
 
+// Definimos as funções basicas da classe Usuario
 void criar_usuario(const web::http::http_request& request);
 void listar_usuarios(const web::http::http_request& request);
 void atualizar_usuario(const web::http::http_request& request, int id);
@@ -17,7 +18,6 @@ void deletar_usuario(const web::http::http_request& request, int id);
 bool carregar_usuarios();
 bool salvar_usuarios();
 
-// ⚠️ ESTA DECLARAÇÃO FALTAVA
 void inicializar_usuarios();
 
 #endif

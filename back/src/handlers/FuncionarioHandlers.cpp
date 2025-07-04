@@ -8,6 +8,7 @@
 std::vector<Funcionario> funcionarios;
 std::mutex funcionarios_mutex;
 
+// Função responsável por carregar nosso arquivo que contem os dados de funcionario
 bool carregar_funcionarios() {
     std::ifstream arquivo("funcionario.txt");
     if (!arquivo.is_open()) return false;
@@ -46,6 +47,9 @@ bool carregar_funcionarios() {
     return true;
 }
 
+
+// Função responsável por salvar no .txt os dados do funcionario que estamos cadastrando
+
 bool salvar_funcionarios() {
     std::ofstream arquivo("funcionario.txt");
     if (!arquivo.is_open()) return false;
@@ -65,6 +69,8 @@ bool salvar_funcionarios() {
     return true;
 }
 
+// Função que verifica se ha funcionarios cadastrados ou não no arquivo
+
 void inicializar_funcionarios() {
     std::lock_guard<std::mutex> lock(funcionarios_mutex);
     if (carregar_funcionarios()) {
@@ -74,6 +80,7 @@ void inicializar_funcionarios() {
     }
 }
 
+// Função responsável por fazer o cadastro do funcionario ao chamar uma rota do tipo POST e com os parametros necessarios sendo passados no Body da requisição
 void criar_funcionario(const web::http::http_request& request) {
     request.extract_json().then([=](const web::json::value& json) {
         if (!json.has_field(U("usuario_id")) ||
@@ -118,7 +125,7 @@ void criar_funcionario(const web::http::http_request& request) {
         request.reply(web::http::status_codes::Created, U("Funcionário cadastrado com sucesso"));
     }).wait();
 }
-
+//Funçãoq ue lista todos os funcionario
 void listar_funcionarios(const web::http::http_request& request) {
     std::lock_guard<std::mutex> lock(funcionarios_mutex);
     web::json::value resposta = web::json::value::array();
@@ -132,7 +139,7 @@ void listar_funcionarios(const web::http::http_request& request) {
     }
     request.reply(web::http::status_codes::OK, resposta);
 }
-
+//Função que atualiza um funcionario
 void atualizar_funcionario(const web::http::http_request& request, int usuario_id) {
     request.extract_json().then([=](const web::json::value& json) {
         std::lock_guard<std::mutex> lock(funcionarios_mutex);
@@ -156,7 +163,7 @@ void atualizar_funcionario(const web::http::http_request& request, int usuario_i
         }
     }).wait();
 }
-
+//Funcao que deleta um funcionario
 void deletar_funcionario(const web::http::http_request& request, int usuario_id) {
     std::lock_guard<std::mutex> lock(funcionarios_mutex);
     auto it = std::remove_if(funcionarios.begin(), funcionarios.end(),
