@@ -1,4 +1,3 @@
-
 import { Film } from 'lucide-react';
 
 interface Movie {
@@ -35,12 +34,13 @@ const MovieCard = ({ movie, onRent }: MovieCardProps) => {
           {movie.year} • {movie.genre}
         </p>
         <div className="flex items-center justify-between">
-          <span className="text-xl font-bold text-blue-900">
+          {/* A cor do preço foi alterada aqui */}
+          <span className="text-xl font-bold text-[#A8109B]">
             R$ {movie.price.toFixed(2)}
           </span>
           <span className={`text-sm font-bold px-2 py-1 ${
             movie.available 
-              ? 'bg-blue-100 text-blue-800' 
+              ? 'bg-[#F2CFEF] text-[#610a59]'
               : 'bg-red-100 text-red-800'
           }`}>
             {movie.available ? 'Disponível' : 'Alugado'}
@@ -51,7 +51,7 @@ const MovieCard = ({ movie, onRent }: MovieCardProps) => {
           onClick={() => onRent(movie.id)}
           className={`w-full py-2 px-4 font-bold text-white ${
             movie.available
-              ? 'bg-blue-800 hover:bg-blue-700'
+              ? 'bg-[#610A59] hover:bg-[#A8109B]'
               : 'bg-gray-600 hover:bg-gray-500'
           }`}
         >

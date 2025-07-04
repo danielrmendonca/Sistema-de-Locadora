@@ -1,33 +1,37 @@
-
-import { Film } from 'lucide-react';
-
 const Header = () => {
   return (
-    <header className="bg-blue-900 shadow-lg">
-      <div className="container mx-auto px-4 py-6">
+    <header className="bg-[#610a59] shadow-lg h-24 flex items-center">
+      <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="bg-gray-200 p-2">
-              <Film size={32} className="text-blue-900" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Logo Locadora Acinsta"
+              className="h-20 w-auto"
+            />
             <div>
+              
               <h1 className="text-3xl font-bold text-white">
-                LOCADORA MILK
+                <span style={{ color: '#FFFFFF' }}>LOCADORA</span>{' '}
+                <span style={{ color: '#FFFFFF' }}>A</span>
+                <span style={{ color: '#FAB7EB' }}>CIN</span>
+                <span style={{ color: '#FFFFFF' }}>STA</span>
               </h1>
               <p className="text-blue-200 text-sm font-bold">
-                Sua Locadora Virtual
+                <span style={{ color: '#BC10AD' }}>A locadora oficial do CIN!</span>{' '}
               </p>
             </div>
           </div>
-          
+
           <nav className="hidden md:flex space-x-4">
-            <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4">
+            {/* A alteração de cor foi aplicada apenas aqui */}
+            <button className="bg-[#A8109B] hover:brightness-90 text-white font-bold py-2 px-4 rounded-md">
               FILMES
             </button>
-            <button className="bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4">
+            <button className="bg-[#A8109B] hover:brightness-90 text-white font-bold py-2 px-4 rounded-md">
               MEUS ALUGUÉIS
             </button>
-            <button className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4">
+            <button className="bg-[#A8109B] hover:brightness-90 text-white font-bold py-2 px-4 rounded-md">
               CONTATO
             </button>
           </nav>

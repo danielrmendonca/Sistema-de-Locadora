@@ -1,4 +1,3 @@
-
 import Header from '../components/Header';
 import MovieShelf from '../components/MovieShelf';
 
@@ -10,7 +9,7 @@ const Index = () => {
       <main className="container mx-auto px-4 py-8">
         <div className="bg-white shadow-lg p-6 mb-8">
           <div className="text-center space-y-4">
-            <h1 className="text-4xl font-bold text-blue-900">
+            <h1 className="text-4xl font-bold text-[#610A59]">
               BEM-VINDO À ERA DOURADA DO CINEMA!
             </h1>
             <p className="text-lg text-gray-700 max-w-2xl mx-auto">
@@ -18,13 +17,14 @@ const Index = () => {
               Alugue seus favoritos e tenha uma noite inesquecível!
             </p>
             <div className="flex justify-center space-x-4 text-sm font-bold">
-              <span className="bg-blue-100 text-blue-800 px-3 py-1">
+              {/* As cores dos selos foram alteradas aqui */}
+              <span className="bg-[#F2CFEF] text-[#610A59] px-3 py-1">
                 QUALIDADE DVD
               </span>
-              <span className="bg-gray-100 text-gray-800 px-3 py-1">
+              <span className="bg-[#F2CFEF] text-[#610A59] px-3 py-1">
                 ENTREGA INSTANTÂNEA
               </span>
-              <span className="bg-blue-100 text-blue-800 px-3 py-1">
+              <span className="bg-[#F2CFEF] text-[#610A59] px-3 py-1">
                 CLÁSSICOS ATEMPORAIS
               </span>
             </div>

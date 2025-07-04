@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import MovieCard from './MovieCard';
 
@@ -20,7 +19,8 @@ const MovieShelf = () => {
       year: 1999,
       genre: "Ficção Científica",
       price: 3.50,
-      available: true
+      available: true,
+      image: 'https://br.web.img2.acsta.net/medias/nmedia/18/91/08/82/20128877.JPG'
     },
     {
       id: 2,
@@ -28,15 +28,17 @@ const MovieShelf = () => {
       year: 1997,
       genre: "Romance/Drama",
       price: 4.00,
-      available: false
-    },
+      available: false,
+      image: 'https://upload.wikimedia.org/wikipedia/pt/2/22/Titanic_poster.jpg'
+    }, 
     {
       id: 3,
       title: "Jurassic Park",
       year: 1993,
       genre: "Aventura",
       price: 3.00,
-      available: true
+      available: true,
+      image: 'https://upload.wikimedia.org/wikipedia/pt/e/e7/Jurassic_Park_poster.jpg'
     },
     {
       id: 4,
@@ -44,7 +46,8 @@ const MovieShelf = () => {
       year: 1999,
       genre: "Ficção Científica",
       price: 3.50,
-      available: true
+      available: true,
+      image: 'https://upload.wikimedia.org/wikipedia/pt/3/30/Star_Wars_Epis%C3%B3dio_1_Amea%C3%A7a_Fantasma.jpg'
     },
     {
       id: 5,
@@ -52,7 +55,8 @@ const MovieShelf = () => {
       year: 1999,
       genre: "Drama",
       price: 3.50,
-      available: true
+      available: true,
+      image: 'https://upload.wikimedia.org/wikipedia/pt/9/99/AmericanBeautyPoster.jpg'
     },
     {
       id: 6,
@@ -60,7 +64,8 @@ const MovieShelf = () => {
       year: 1994,
       genre: "Animação",
       price: 2.50,
-      available: false
+      available: false,
+      image: 'https://ingresso-a.akamaihd.net/img/cinema/cartaz/4116-cartaz.jpg'
     },
     {
       id: 7,
@@ -68,7 +73,8 @@ const MovieShelf = () => {
       year: 1994,
       genre: "Drama",
       price: 3.00,
-      available: true
+      available: true,
+      image: 'https://upload.wikimedia.org/wikipedia/pt/c/c0/ForrestGumpPoster.jpg'
     },
     {
       id: 8,
@@ -76,7 +82,8 @@ const MovieShelf = () => {
       year: 1994,
       genre: "Crime",
       price: 3.50,
-      available: true
+      available: true,
+      image: 'https://upload.wikimedia.org/wikipedia/pt/8/82/Pulp_Fiction_cover.jpg'
     }
   ]);
 
