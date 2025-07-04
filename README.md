@@ -30,6 +30,7 @@ O sistema foi projetado para oferecer as seguintes funcionalidades principais: a
 <br>
 
 ### 🧱 Atributos
+
 **Entidade** "Usuário":
 
 - Atributos: E-mail, Nome, Gênero, Telefone (multivalorado), Senha, CPF, Data de Nascimento, Endereço (Composto - Bairro, Rua, CEP, Cidade).
