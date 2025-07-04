@@ -15,7 +15,70 @@ O "ACInsta em Casa" é uma plataforma digital desenvolvida para otimizar a loca�
 O sistema foi projetado para oferecer as seguintes funcionalidades principais: a locação de múltiplos filmes de diversos gêneros e o acompanhamento online do status do aluguel, permitindo ao usuário verificar o tempo restante para a devolução de cada item.
 
 ## 🧬 Elementos do Modelo ER
-- **Pessoa** - Entidade pai que participa de uma herança sobreposta total
+- **Usuário** - Entidade pai que participa de uma herança sobreposta total
+- **Empregado** - Especialização de usuário.
+- **Cliente** - Especialização de usário.
+- **Empresa** - Especialização de usuário.
+- **Mídia** - Filmes cadastrados na plataforma.
+- **Genero de Mídia** - Generos dos respectivos filmes cadastrados.
+- **Genero** - Genero que estão cadastrados na plataforma (Ex: Terror, Comédia...).
+- **Aluguel** - Se está alugado ou não o filme.
+
+### 🧱 Atributos
+Entidade "Usuário":
+Atributos: E-mail, Nome, Gênero, Telefone (multivalorado), Senha, CPF, Data de Nascimento, Endereço (Composto - Bairro, Rua, CEP, Cidade).
+
+Entidade "Empregado":
+Atributos: Posição, Data de Admissão, Salário, Data de Demissão.
+
+Entidade "Cliente":
+Atributos: Data de Criação (Conta), Limite de Crédito.
+
+Entidade "Empresa":
+Atributos: E-mail, CNPJ, Telefones, Nome, Endereço (Composto - Bairro, Rua, CEP, Cidade), Site.
+
+Entidade "Mídia":
+Atributos: ID, Diretor, Título, Tempo, Nota, Data, Classificação Etária, Data de Lançamento, Dublado, Legendado.
+
+Entidade "Gênero":
+Atributos: ID, Gênero (ou Nome do Gênero).
+
+Entidade "Mídia_Gênero" (Tabela de Ligação):
+Atributos: ID_Mídia, ID_Gênero.
+
+Entidade "Aluguel":
+Atributos: ID, ID_Mídia, ID_Usuário, Data de Aluguel, Data de Devolução, Preço.
+
+### Relacionamentos
+1. Relacionamento de Especialização/Generalização (Herança)
+Entidades Envolvidas: User (Usuário) é a entidade genérica (superclasse), enquanto Employe (Empregado) e Client (Cliente) são as entidades especializadas (subclasses).
+Tipo: Herança (ou "ISA", que significa "é um").
+Descrição: Um Usuário no sistema pode ser um Empregado ou um Cliente. Tanto Empregado quanto Cliente herdam todos os atributos da entidade User (como Nome, CPF, Endereço) e adicionam seus próprios atributos específicos.
+Employe adiciona: Posição, Salário, Data de Admissão, etc.
+Client adiciona: Limite de Crédito e Data de Cadastro.
+
+2. Relacionamento de Aluguel (Um-para-Muitos)
+Entidades Envolvidas: Client (Cliente) e Rented (Aluguel).
+Tipo: Um-para-Muitos (1:N).
+Descrição: Um Cliente pode realizar vários Aluguéis ao longo do tempo. No entanto, cada registro de Aluguel (Rented) pertence a um único Cliente. Isso é indicado pelo atributo ID User dentro da entidade Rented.
+
+3. Relacionamento entre Mídia e Aluguel (Um-para-Muitos)
+Entidades Envolvidas: Media (Mídia) e Rented (Aluguel).
+Tipo: Um-para-Muitos (1:N).
+Descrição: Uma Mídia (um filme específico) pode ser alugada várias vezes. Cada registro na tabela Rented corresponde ao aluguel de uma única Mídia. A conexão é feita pelo atributo ID Film (que representa o ID da Mídia) na entidade Rented.
+
+4. Relacionamento entre Mídia e Gênero (Muitos-para-Muitos)
+Entidades Envolvidas: Media (Mídia) e Genre (Gênero).
+Tipo: Muitos-para-Muitos (N:M).
+Descrição: Este é um relacionamento complexo, resolvido pela entidade associativa Media_Genre.
+Uma Mídia pode pertencer a vários Gêneros (ex: um filme pode ser "Ação" e "Ficção Científica").
+Um Gênero pode conter várias Mídias (ex: o gênero "Ação" tem muitos filmes).
+A entidade Media_Genre existe para conectar as duas, guardando pares de Media ID e Gene ID.
+
+5. Relacionamento de Trabalho (Um-para-Muitos)
+Entidades Envolvidas: Enterprise (Empresa) e User (do tipo Employe).
+Tipo: Um-para-Muitos (1:N).
+Descrição: Uma Empresa pode ter vários Empregados (que são Usuários). O diagrama sugere que um Empregado trabalha para uma única Empresa.
 
 
 # Sistema-de-Locadora: Locadora ACInsta em Casa
