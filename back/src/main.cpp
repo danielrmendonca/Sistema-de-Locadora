@@ -7,6 +7,7 @@
 #include "handlers/FilmeHandlers.h"
 #include "handlers/GeneroHandlers.h"
 #include "handlers/GeneroFilmeHandlers.h"
+#include "handlers/AluguelHandlers.h"  
 
 using namespace web;
 using namespace web::http;
@@ -19,6 +20,7 @@ int main() {
     inicializar_filmes();
     inicializar_generos();
     inicializar_genero_filmes();
+    inicializar_alugueis(); 
 
     http_listener listener(U("http://localhost:8080"));
 
@@ -39,6 +41,8 @@ int main() {
             criar_genero(request);
         } else if (path[0] == U("genero_filme")) {
             criar_genero_filme(request);
+        } else if (path[0] == U("aluguel")) {   
+            criar_aluguel(request);
         } else {
             request.reply(status_codes::NotFound, "Rota POST não encontrada");
         }
@@ -61,6 +65,8 @@ int main() {
             listar_generos(request);
         } else if (path[0] == U("genero_filme")) {
             listar_genero_filmes(request);
+        } else if (path[0] == U("aluguel")) { 
+            listar_alugueis(request);
         } else {
             request.reply(status_codes::NotFound, "Rota GET não encontrada");
         }
@@ -85,6 +91,8 @@ int main() {
                 atualizar_filme(request, id);
             } else if (path[0] == U("genero")) {
                 atualizar_genero(request, id);
+            } else if (path[0] == U("aluguel")) {  
+                atualizar_aluguel(request, id);
             } else {
                 request.reply(status_codes::BadRequest, "Rota PATCH inválida");
             }
@@ -124,8 +132,20 @@ int main() {
                 request.reply(status_codes::BadRequest, "Formato da URL incorreto para DELETE");
             }
         } else if (path[0] == U("genero_filme")) {
-            // Para deletar genero_filme, o corpo da requisição deve ter filme_id e genero_id
             deletar_genero_filme(request);
+        } else if (path[0] == U("aluguel")) {  
+            if (path.size() == 2) {
+                int id = 0;
+                try {
+                    id = std::stoi(path[1]);
+                } catch (...) {
+                    request.reply(status_codes::BadRequest, "ID inválido");
+                    return;
+                }
+                deletar_aluguel(request, id);
+            } else {
+                request.reply(status_codes::BadRequest, "Formato da URL incorreto para DELETE");
+            }
         } else {
             request.reply(status_codes::NotFound, "Rota DELETE não encontrada");
         }
