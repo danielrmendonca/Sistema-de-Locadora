@@ -133,7 +133,7 @@ O sistema foi projetado para oferecer as seguintes funcionalidades principais: a
 
 - Na raiz do back rodar:
 
--  mkdir build
+-  - mkdir build
 
 -  cd build
 
