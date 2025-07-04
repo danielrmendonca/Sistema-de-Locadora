@@ -28,37 +28,39 @@ O sistema foi projetado para oferecer as seguintes funcionalidades principais: a
 - **Aluguel** - Se está alugado ou não o filme.
 
 ### 🧱 Atributos
+### 🧱 Atributos
 Entidade "Usuário":
 
-Atributos: E-mail, Nome, Gênero, Telefone (multivalorado), Senha, CPF, Data de Nascimento, Endereço (Composto - Bairro, Rua, CEP, Cidade).
+- Atributos: E-mail, Nome, Gênero, Telefone (multivalorado), Senha, CPF, Data de Nascimento, Endereço (Composto - Bairro, Rua, CEP, Cidade).
 
 Entidade "Empregado":
 
-Atributos: Posição, Data de Admissão, Salário, Data de Demissão.
+- Atributos: Posição, Data de Admissão, Salário, Data de Demissão.
 
 Entidade "Cliente":
 
-Atributos: Data de Criação (Conta), Limite de Crédito.
+- Atributos: Data de Criação (Conta), Limite de Crédito.
 
 Entidade "Empresa":
 
-Atributos: E-mail, CNPJ, Telefones, Nome, Endereço (Composto - Bairro, Rua, CEP, Cidade), Site.
+- Atributos: E-mail, CNPJ, Telefones, Nome, Endereço (Composto - Bairro, Rua, CEP, Cidade), Site.
 
 Entidade "Mídia":
 
-Atributos: ID, Diretor, Título, Tempo, Nota, Data, Classificação Etária, Data de Lançamento, Dublado, Legendado.
+- Atributos: ID, Diretor, Título, Tempo, Nota, Data, Classificação Etária, Data de Lançamento, Dublado, Legendado.
 
 Entidade "Gênero":
 
-Atributos: ID, Gênero (ou Nome do Gênero).
+- Atributos: ID, Gênero (ou Nome do Gênero).
 
 Entidade "Mídia_Gênero" (Tabela de Ligação):
 
-Atributos: ID_Mídia, ID_Gênero.
+- Atributos: ID_Mídia, ID_Gênero.
 
 Entidade "Aluguel":
 
-Atributos: ID, ID_Mídia, ID_Usuário, Data de Aluguel, Data de Devolução, Preço.
+- Atributos: ID, ID_Mídia, ID_Usuário, Data de Aluguel, Data de Devolução, Preço.
+
 
 ### Relacionamentos
 1. Relacionamento de Especialização/Generalização (Herança)
