@@ -68,7 +68,8 @@ O sistema foi projetado para oferecer as seguintes funcionalidades principais: a
 ## 🥰 Relacionamentos
 
 1. Relacionamento de Especialização/Generalização (Herança)
-Entidades Envolvidas: User (Usuário) é a entidade genérica (superclasse), enquanto Employe (Empregado) e Client (Cliente) são as entidades especializadas (subclasses).
+
+- **Entidades Envolvidas**: User (Usuário) é a entidade genérica (superclasse), enquanto Employe (Empregado) e Client (Cliente) são as entidades especializadas (subclasses).
 
 - **Tipo**: Herança (ou "ISA", que significa "é um").
 
@@ -79,21 +80,24 @@ Entidades Envolvidas: User (Usuário) é a entidade genérica (superclasse), enq
 - **Client adiciona**: Limite de Crédito e Data de Cadastro.
 
 **2.** Relacionamento de Aluguel (Um-para-Muitos)
-Entidades Envolvidas: Client (Cliente) e Rented (Aluguel).
+
+- **Entidades Envolvidas**: Client (Cliente) e Rented (Aluguel).
 
 - **Tipo**: Um-para-Muitos (1:N).
 
 - **Descrição**: Um Cliente pode realizar vários Aluguéis ao longo do tempo. No entanto, cada registro de Aluguel (Rented) pertence a um único Cliente. Isso é indicado pelo atributo ID User dentro da entidade Rented.
 
 **3.** Relacionamento entre Mídia e Aluguel (Um-para-Muitos)
-Entidades Envolvidas: Media (Mídia) e Rented (Aluguel).
+
+- **Entidades Envolvidas**: Media (Mídia) e Rented (Aluguel).
 
 - **Tipo**: Um-para-Muitos (1:N).
 
 - **Descrição**: Uma Mídia (um filme específico) pode ser alugada várias vezes. Cada registro na tabela Rented corresponde ao aluguel de uma única Mídia. A conexão é feita pelo atributo ID Film (que representa o ID da Mídia) na entidade Rented.
 
 **4.** Relacionamento entre Mídia e Gênero (Muitos-para-Muitos)
-Entidades Envolvidas: Media (Mídia) e Genre (Gênero).
+
+- **Entidades Envolvidas**: Media (Mídia) e Genre (Gênero).
 
 - **Tipo**: Muitos-para-Muitos (N:M).
 
@@ -106,7 +110,8 @@ Entidades Envolvidas: Media (Mídia) e Genre (Gênero).
 - A entidade **Media_Genre** existe para conectar as duas, guardando pares de Media ID e Gene ID.
 
 **5.** Relacionamento de Trabalho (Um-para-Muitos)
-Entidades Envolvidas: Enterprise (Empresa) e User (do tipo Employe).
+
+- **Entidades Envolvidas**: Enterprise (Empresa) e User (do tipo Employe).
 
 - **Tipo**: Um-para-Muitos (1:N).
 
@@ -122,14 +127,15 @@ Entidades Envolvidas: Enterprise (Empresa) e User (do tipo Employe).
 
 # Comandos para rodar no back
 
-Instalar o vcpkg e o cpprest
+- Instalar o vcpkg e o cpprest
 
-vcpkg install cpprestsdk cpprestsdk:x64-windows
+- vcpkg install cpprestsdk cpprestsdk:x64-windows
 
-Na raiz do back rodar:
+- Na raiz do back rodar:
 
- mkdir build
- cd build
+ - mkdir build
+ 
+ - cd build
 
  em /build
  cmake ..
