@@ -29,7 +29,7 @@ O sistema foi projetado para oferecer as seguintes funcionalidades principais: a
 
 <br>
 
-### 🧱 Atributos
+## 👍 Atributos
 
 **Entidade** "Usuário":
 
