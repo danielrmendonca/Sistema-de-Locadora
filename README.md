@@ -148,5 +148,11 @@ Finalmente, desenvolvemos a lógica para implementar as regras de negócio do si
   - em /build
 
   - cmake ..
+ 
+  Outra opção é instalar o cpprest como informado anteriormente e integrar ele no Visual Studio, lá o visual studio builda o projeto na opção de run. Basta usar o comando
+
+vcpkg integrate install
+
+e após rodar o servidor, acessar via http://localhost:8080/
 
   - cmake --build .
