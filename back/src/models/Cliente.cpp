@@ -1,5 +1,7 @@
 #include "Cliente.h"
 
+// Implementação de como funciona o a criação de um objeto do tipo cliente, atribuindo os valores ao construir o objeto. Também tem a implementação dos getters e setters
+
 Cliente::Cliente(int usuario_id, double limite_credito, const std::vector<std::string>& data_ingresso)
     : usuario_id(usuario_id), limite_credito(limite_credito), data_ingresso(data_ingresso) {}
 

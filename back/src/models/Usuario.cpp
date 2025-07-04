@@ -1,6 +1,8 @@
 #include "Usuario.h"
 using namespace std;
 
+// Implementação de como funciona o a criação de um objeto do tipo Usuario, atribuindo os valores ao construir o objeto. Também tem a implementação dos getters e setters
+
 Usuario::Usuario(int id, const std::string& nome, const std::string& email, const std::string& senha)
     : id(id), nome(nome), email(email), senha(senha) {
 }

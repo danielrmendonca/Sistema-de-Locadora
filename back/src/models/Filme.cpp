@@ -1,5 +1,8 @@
 #include "Filme.h"
 
+
+// Implementação de como funciona o a criação de um objeto do tipo Filme, atribuindo os valores ao construir o objeto. Também tem a implementação dos getters e setters
+
 Filme::Filme(int id, bool dublado, bool legendado, const std::string& lancamento,
              const std::string& classificacao_indicativa, const std::string& diretor,
              const std::string& titulo, double duracao, double nota)

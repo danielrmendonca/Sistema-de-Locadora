@@ -3,7 +3,7 @@
 
 #include <string>
 #include <vector>
-
+// Definição da clase Usuario e seus getters e setters
 class Usuario {
 public:
     struct Endereco {
@@ -30,10 +30,13 @@ private:
     std::string cpf;
 
 public:
+
+    //Duas formas de criar um usuario, Temos 2 construtores, um inicia um usuario vazio e o segundo com parametros esperados
     Usuario() = default;
     Usuario(int id, const std::string& nome, const std::string& email, const std::string& senha);
 
-    // Getters
+    // Getters - Deixamos que a implementação dos Getters fiquem a cargo do nosso Usuario.cpp
+
     int getId() const;
     std::string getNome() const;
     std::string getEmail() const;
@@ -45,7 +48,8 @@ public:
     std::string getTelefone() const;
     std::string getCpf() const;
 
-    // Setters
+    // Setters - Deixamos que a implementação dos Setters fiquem a cargo do nosso Usuario.cpp
+
     void setNome(const std::string& nome);
     void setEmail(const std::string& email);
     void setSenha(const std::string& senha);

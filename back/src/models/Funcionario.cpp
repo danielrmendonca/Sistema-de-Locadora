@@ -1,5 +1,7 @@
 #include "Funcionario.h"
 
+// Implementação de como funciona o a criação de um objeto do tipo Funcionario, atribuindo os valores ao construir o objeto. Também tem a implementação dos getters e setters
+
 Funcionario::Funcionario(int usuario_id, const std::vector<std::string>& data_admissao,
                          const std::string& cargo, double salario,
                          const std::vector<std::string>& data_desligamento)

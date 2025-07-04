@@ -3,6 +3,8 @@
 
 #include <string>
 
+// Definição da clase filme e seus getters e setters
+
 class Filme {
 private:
     int id;
@@ -16,10 +18,14 @@ private:
     double nota;
 
 public:
+
+    //Duas formas de criar um Filme, Temos 2 construtores, um inicia um filme vazio e o segundo com parametros esperados
     Filme() = default;
     Filme(int id, bool dublado, bool legendado, const std::string& lancamento,
           const std::string& classificacao_indicativa, const std::string& diretor,
           const std::string& titulo, double duracao, double nota);
+
+    // Getters - Deixamos que a implementação dos Getters fiquem a cargo do nosso Feilme.cpp
 
     int getId() const;
     bool isDublado() const;
@@ -31,6 +37,7 @@ public:
     double getDuracao() const;
     double getNota() const;
 
+    // Setters - Deixamos que a implementação dos Setters fiquem a cargo do nosso Filme.cpp
     void setDublado(bool dublado);
     void setLegendado(bool legendado);
     void setLancamento(const std::string& lancamento);
