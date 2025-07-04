@@ -6,7 +6,7 @@ Este projeto apresenta a modelagem de um sistema para uma locadora de filmes, de
 
 <br>
 
-## Introdução
+## 🙌 Introdução
 O "ACInsta em Casa" é uma plataforma digital desenvolvida para otimizar a locação de filmes. Ela centraliza um vasto catálogo de títulos, oferecendo um sistema de busca e filtragem avançado por tema ou gênero. Através da interface, os usuários podem realizar a locação de filmes específicos de maneira totalmente remota, simplificando o processo de escolha e aluguel.
 
 <br>
@@ -14,7 +14,10 @@ O "ACInsta em Casa" é uma plataforma digital desenvolvida para otimizar a loca�
 ## 🖊️ Requisitos
 O sistema foi projetado para oferecer as seguintes funcionalidades principais: a locação de múltiplos filmes de diversos gêneros e o acompanhamento online do status do aluguel, permitindo ao usuário verificar o tempo restante para a devolução de cada item.
 
+<br>Emo
+
 ## 🧬 Elementos do Modelo ER
+
 - **Usuário** - Entidade pai que participa de uma herança sobreposta total
 - **Empregado** - Especialização de usuário.
 - **Cliente** - Especialização de usário.
