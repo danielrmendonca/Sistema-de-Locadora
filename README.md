@@ -119,6 +119,13 @@ O sistema foi projetado para oferecer as seguintes funcionalidades principais: a
 
 <br>
 
+## 🎓 Aprendizados
+
+Ao desenvolver este projeto, nós aplicamos na prática os pilares da Programação Orientada a Objetos (POO), utilizando classes, aplicando herança para especializar Usuario em Cliente, e usando polimorfismo para tratar diferentes tipos de objetos de forma uniforme. Aprendemos a converter um diagrama conceitual em código, e estruturei os dados com vectors e structs para representar os relacionamentos e atributos complexos. O projeto nos forçou a criar uma boa arquitetura de software, então, separamos as responsabilidades em camadas, gerenciamos a memória (um desafio chave em C++) e garantimos a persistência dos dados em arquivos.
+
+Finalmente, desenvolvemos a lógica para implementar as regras de negócio do sistema, como o cálculo de multas, prazos e outras restrições. Foi um exercício completo que transformou nosso conhecimento teórico em um software funcional e bem estruturado. Desenvolver este projeto ensina a aplicar na prática os pilares da Programação Orientada a Objetos (POO), utilizando classes, herança para especializar Usuario em Cliente, e polimorfismo para tratar diferentes tipos de objetos de forma uniforme.
+
+
 ## 🏦 Banco de Dados ( Esquema )
 
 ![image](https://github.com/user-attachments/assets/81f286ca-fe32-4b33-8c20-450c336b0088)
