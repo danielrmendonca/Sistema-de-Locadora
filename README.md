@@ -1,3 +1,9 @@
+## Integrantes
+AGATA GIOVANNA DE MELO ALBUQUERQUE
+DANIEL RAMOS MENDONÇA
+FELIPE DA SILVA LEITE 
+MATHEUS HENRIQUE MARTINS CAVALCANTI
+
 ## 💻 Projeto
 Projeto da disciplina ***Estrutura de dados orientada a objetos***, da graduação em [Sistemas de Informação (SI)](https://portal.cin.ufpe.br/graduacao/sistemas-de-informacao/) do [Centro de Informática (CIN)](https://portal.cin.ufpe.br/) da [Universidade Federal de Pernambuco (UFPE)](https://www.ufpe.br/), cursada em no letivo 2025.1
 <br>
