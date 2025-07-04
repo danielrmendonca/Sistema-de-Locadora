@@ -61,47 +61,47 @@ Atributos: ID, ID_Mídia, ID_Usuário, Data de Aluguel, Data de Devolução, Pre
 1. Relacionamento de Especialização/Generalização (Herança)
 Entidades Envolvidas: User (Usuário) é a entidade genérica (superclasse), enquanto Employe (Empregado) e Client (Cliente) são as entidades especializadas (subclasses).
 
-Tipo: Herança (ou "ISA", que significa "é um").
+**Tipo**: Herança (ou "ISA", que significa "é um").
 
-Descrição: Um Usuário no sistema pode ser um Empregado ou um Cliente. Tanto Empregado quanto Cliente herdam todos os atributos da entidade User (como Nome, CPF, Endereço) e adicionam seus próprios atributos específicos.
+**Descrição**: Um Usuário no sistema pode ser um Empregado ou um Cliente. Tanto Empregado quanto Cliente herdam todos os atributos da entidade User (como Nome, CPF, Endereço) e adicionam seus próprios atributos específicos.
 
-Employe adiciona: Posição, Salário, Data de Admissão, etc.
+**Employe** adiciona: Posição, Salário, Data de Admissão, etc.
 
-Client adiciona: Limite de Crédito e Data de Cadastro.
+**Client adiciona**: Limite de Crédito e Data de Cadastro.
 
 2. Relacionamento de Aluguel (Um-para-Muitos)
 Entidades Envolvidas: Client (Cliente) e Rented (Aluguel).
 
-Tipo: Um-para-Muitos (1:N).
+**Tipo**: Um-para-Muitos (1:N).
 
-Descrição: Um Cliente pode realizar vários Aluguéis ao longo do tempo. No entanto, cada registro de Aluguel (Rented) pertence a um único Cliente. Isso é indicado pelo atributo ID User dentro da entidade Rented.
+**Descrição**: Um Cliente pode realizar vários Aluguéis ao longo do tempo. No entanto, cada registro de Aluguel (Rented) pertence a um único Cliente. Isso é indicado pelo atributo ID User dentro da entidade Rented.
 
 3. Relacionamento entre Mídia e Aluguel (Um-para-Muitos)
 Entidades Envolvidas: Media (Mídia) e Rented (Aluguel).
 
-Tipo: Um-para-Muitos (1:N).
+**Tipo**: Um-para-Muitos (1:N).
 
-Descrição: Uma Mídia (um filme específico) pode ser alugada várias vezes. Cada registro na tabela Rented corresponde ao aluguel de uma única Mídia. A conexão é feita pelo atributo ID Film (que representa o ID da Mídia) na entidade Rented.
+**Descrição**: Uma Mídia (um filme específico) pode ser alugada várias vezes. Cada registro na tabela Rented corresponde ao aluguel de uma única Mídia. A conexão é feita pelo atributo ID Film (que representa o ID da Mídia) na entidade Rented.
 
 4. Relacionamento entre Mídia e Gênero (Muitos-para-Muitos)
 Entidades Envolvidas: Media (Mídia) e Genre (Gênero).
 
-Tipo: Muitos-para-Muitos (N:M).
+**Tipo**: Muitos-para-Muitos (N:M).
 
-Descrição: Este é um relacionamento complexo, resolvido pela entidade associativa Media_Genre.
+**Descrição**: Este é um relacionamento complexo, resolvido pela entidade associativa Media_Genre.
 
-Uma Mídia pode pertencer a vários Gêneros (ex: um filme pode ser "Ação" e "Ficção Científica").
+Uma **Mídia** pode pertencer a vários Gêneros (ex: um filme pode ser "Ação" e "Ficção Científica").
 
-Um Gênero pode conter várias Mídias (ex: o gênero "Ação" tem muitos filmes).
+Um **Gênero** pode conter várias Mídias (ex: o gênero "Ação" tem muitos filmes).
 
-A entidade Media_Genre existe para conectar as duas, guardando pares de Media ID e Gene ID.
+A entidade **Media_Genre** existe para conectar as duas, guardando pares de Media ID e Gene ID.
 
 5. Relacionamento de Trabalho (Um-para-Muitos)
 Entidades Envolvidas: Enterprise (Empresa) e User (do tipo Employe).
 
-Tipo: Um-para-Muitos (1:N).
+**Tipo**: Um-para-Muitos (1:N).
 
-Descrição: Uma Empresa pode ter vários Empregados (que são Usuários). O diagrama sugere que um Empregado trabalha para uma única Empresa.
+**Descrição**: Uma Empresa pode ter vários Empregados (que são Usuários). O diagrama sugere que um Empregado trabalha para uma única Empresa.
 
 
 # Sistema-de-Locadora: Locadora ACInsta em Casa
