@@ -125,9 +125,9 @@ bool salvar_usuarios() {
 void inicializar_usuarios() {
     std::lock_guard<std::mutex> lock(usuarios_mutex);
     if (carregar_usuarios()) {
-        std::cout << "Usuários carregados do arquivo." << std::endl;
+        std::cout << "Usuários carregados do arquivo.";
     } else {
-        std::cout << "Nenhum usuário encontrado no arquivo." << std::endl;
+        std::cout << "Nenhum usuário encontrado no arquivo.";
     }
 }
 

@@ -17,3 +17,7 @@ target_include_directories(LocadoraServer PRIVATE
 find_package(cpprestsdk CONFIG REQUIRED)
 
 target_link_libraries(LocadoraServer PRIVATE cpprestsdk::cpprest)
+
+# Se estiver no Linux e der erro com threads, descomente:
+# find_package(Threads REQUIRED)
+# target_link_libraries(LocadoraServer PRIVATE Threads::Threads)

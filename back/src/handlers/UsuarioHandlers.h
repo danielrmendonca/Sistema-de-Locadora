@@ -1,7 +1,7 @@
 #ifndef USUARIO_HANDLERS_H
 #define USUARIO_HANDLERS_H
 
-#include <cpprest/http_listener.h>  
+#include <cpprest/http_listener.h>
 #include "models/Usuario.h"
 #include <vector>
 
@@ -16,5 +16,8 @@ void deletar_usuario(const web::http::http_request& request, int id);
 // Funções para persistência dos usuários
 bool carregar_usuarios();
 bool salvar_usuarios();
+
+// ⚠️ ESTA DECLARAÇÃO FALTAVA
+void inicializar_usuarios();
 
 #endif
