@@ -63,8 +63,9 @@ O sistema foi projetado para oferecer as seguintes funcionalidades principais: a
 
 - Atributos: ID, ID_Mídia, ID_Usuário, Data de Aluguel, Data de Devolução, Preço.
 
+<br>
 
-## 🧬 Elementos do Modelo ER
+## 🥰 Relacionamentos
 
 1. Relacionamento de Especialização/Generalização (Herança)
 Entidades Envolvidas: User (Usuário) é a entidade genérica (superclasse), enquanto Employe (Empregado) e Client (Cliente) são as entidades especializadas (subclasses).
@@ -77,21 +78,21 @@ Entidades Envolvidas: User (Usuário) é a entidade genérica (superclasse), enq
 
 - **Client adiciona**: Limite de Crédito e Data de Cadastro.
 
-2. Relacionamento de Aluguel (Um-para-Muitos)
+**2.** Relacionamento de Aluguel (Um-para-Muitos)
 Entidades Envolvidas: Client (Cliente) e Rented (Aluguel).
 
 - **Tipo**: Um-para-Muitos (1:N).
 
 - **Descrição**: Um Cliente pode realizar vários Aluguéis ao longo do tempo. No entanto, cada registro de Aluguel (Rented) pertence a um único Cliente. Isso é indicado pelo atributo ID User dentro da entidade Rented.
 
-3. Relacionamento entre Mídia e Aluguel (Um-para-Muitos)
+**3.** Relacionamento entre Mídia e Aluguel (Um-para-Muitos)
 Entidades Envolvidas: Media (Mídia) e Rented (Aluguel).
 
 - **Tipo**: Um-para-Muitos (1:N).
 
 - **Descrição**: Uma Mídia (um filme específico) pode ser alugada várias vezes. Cada registro na tabela Rented corresponde ao aluguel de uma única Mídia. A conexão é feita pelo atributo ID Film (que representa o ID da Mídia) na entidade Rented.
 
-4. Relacionamento entre Mídia e Gênero (Muitos-para-Muitos)
+**4.** Relacionamento entre Mídia e Gênero (Muitos-para-Muitos)
 Entidades Envolvidas: Media (Mídia) e Genre (Gênero).
 
 - **Tipo**: Muitos-para-Muitos (N:M).
@@ -104,24 +105,20 @@ Entidades Envolvidas: Media (Mídia) e Genre (Gênero).
 
 - A entidade **Media_Genre** existe para conectar as duas, guardando pares de Media ID e Gene ID.
 
-5. Relacionamento de Trabalho (Um-para-Muitos)
+**5.** Relacionamento de Trabalho (Um-para-Muitos)
 Entidades Envolvidas: Enterprise (Empresa) e User (do tipo Employe).
 
 - **Tipo**: Um-para-Muitos (1:N).
 
 - **Descrição**: Uma Empresa pode ter vários Empregados (que são Usuários). O diagrama sugere que um Empregado trabalha para uma única Empresa.
 
+<br>
 
-# Sistema-de-Locadora: Locadora ACInsta em Casa
-Sistema de gerenciamento de uma locadora de filmes em C++
-
-Esquema de Banco de Dados:
-
+## 🏦 Banco de Dados ( Esquema )
 
 ![image](https://github.com/user-attachments/assets/81f286ca-fe32-4b33-8c20-450c336b0088)
 
-
-
+<br>
 
 # Comandos para rodar no back
 
