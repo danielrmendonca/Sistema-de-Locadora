@@ -8,7 +8,7 @@
 #include <mutex>  // <- Você precisa incluir <mutex> para usar std::mutex
 
 extern std::vector<Cliente> clientes;
-extern std::mutex clientes_mutex;  // <- Adicione esta linha!
+extern std::mutex cliente_mutex;  // <- Adicione esta linha!
 
 // Definimos as funções basicas da classe Cliente
 void inicializar_clientes();

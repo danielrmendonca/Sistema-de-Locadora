@@ -9,15 +9,14 @@
 extern std::vector<GeneroFilme> genero_filmes;
 extern std::mutex genero_filme_mutex;
 
-// Definimos as funções basicas da classe GeneroFilme
+// Funções básicas de manipulação
 void inicializar_genero_filmes();
 void criar_genero_filme(const web::http::http_request& request);
-void listar_genero_filmes(const web::http::http_request& request);
-void deletar_genero_filme(const web::http::http_request& request);
+void listar_genero_filme(const web::http::http_request& request);
+void atualizar_genero_filme(const web::http::http_request& request, int id);
+void deletar_genero_filme(const web::http::http_request& request, int filme_id, int genero_id);
 
-
-// Definimos as funções de carregamento dos dados de GereroFilme do nosso .txt e salvar no arquivo
-
+// Funções de carregamento e salvamento
 bool carregar_genero_filmes();
 bool salvar_genero_filmes();
 

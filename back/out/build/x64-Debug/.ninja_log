@@ -1,0 +1,22 @@
+# ninja log v6
+65	150	7741579524737659	CMakeFiles/LocadoraServer.dir/src/models/GeneroFilme.cpp.obj	ea47af2c8f1e7baf
+61	542	7741579524691142	CMakeFiles/LocadoraServer.dir/src/models/Genero.cpp.obj	7b33432d856f7806
+43	546	7741579524513357	CMakeFiles/LocadoraServer.dir/src/models/Aluguel.cpp.obj	1b5099ebb8e672df
+51	559	7741579524599402	CMakeFiles/LocadoraServer.dir/src/models/Filme.cpp.obj	9e04faa54e1e9629
+47	566	7741579524554354	CMakeFiles/LocadoraServer.dir/src/models/Cliente.cpp.obj	f32d499ad3abc6b3
+56	569	7741579524641145	CMakeFiles/LocadoraServer.dir/src/models/Funcionario.cpp.obj	16457fa393e23cf7
+69	613	7741579524777669	CMakeFiles/LocadoraServer.dir/src/models/Usuario.cpp.obj	aeefd6a4c04b79bf
+39	2536	7741579524468217	CMakeFiles/LocadoraServer.dir/src/main.cpp.obj	e7182d3f49a6a0b3
+30	2562	7741579524381692	CMakeFiles/LocadoraServer.dir/src/handlers/GeneroHandlers.cpp.obj	9a6fbb457eede831
+34	2607	7741579524416861	CMakeFiles/LocadoraServer.dir/src/handlers/UsuarioHandlers.cpp.obj	b9e15039874c3651
+17	2614	7741579524255132	CMakeFiles/LocadoraServer.dir/src/handlers/FilmeHandlers.cpp.obj	18e3bada6981a8eb
+13	2632	7741579524214366	CMakeFiles/LocadoraServer.dir/src/handlers/ClienteHandlers.cpp.obj	85b2fbe54dbc6fb8
+21	2659	7741579524290208	CMakeFiles/LocadoraServer.dir/src/handlers/FuncionarioHandlers.cpp.obj	9b7ab5dd9e7cd241
+5	2665	7741579524139274	CMakeFiles/LocadoraServer.dir/src/handlers/AluguelHandlers.cpp.obj	5194befef4a47d85
+32	566	7741587435613103	CMakeFiles/LocadoraServer.dir/src/models/GeneroFilme.cpp.obj	ea47af2c8f1e7baf
+28	2138	7741587435563122	CMakeFiles/LocadoraServer.dir/src/main.cpp.obj	e7182d3f49a6a0b3
+23	2145	7741587435523108	CMakeFiles/LocadoraServer.dir/src/handlers/GeneroHandlers.cpp.obj	9a6fbb457eede831
+18	2201	7741587435467193	CMakeFiles/LocadoraServer.dir/src/handlers/GeneroFilmeHandlers.cpp.obj	65eb929ed87de422
+2204	2970	7741587457330326	LocadoraServer.exe	53b89f11ba87176
+7	1809	7741593362789014	CMakeFiles/LocadoraServer.dir/src/main.cpp.obj	e7182d3f49a6a0b3
+1812	2344	7741593380844611	LocadoraServer.exe	53b89f11ba87176

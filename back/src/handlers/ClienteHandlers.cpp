@@ -5,60 +5,90 @@
 #include <cpprest/asyncrt_utils.h>
 #include "handlers/UsuarioHandlers.h" // Para acessar usuarios e seus ids
 
+using namespace web;
+using namespace http;
+using namespace http::experimental::listener;
 std::vector<Cliente> clientes;
-std::mutex clientes_mutex;
+std::mutex cliente_mutex;
 
 // Função responsável por carregar nosso arquivo que contem os dados de cliente
 bool carregar_clientes() {
-    std::ifstream arquivo("cliente.txt");
-    if (!arquivo.is_open()) return false;
+    std::ifstream file("cliente.txt");
+    if (!file.is_open()) return false;
 
-    clientes.clear();
-    std::string linha;
+    std::string conteudo((std::istreambuf_iterator<char>(file)),
+        std::istreambuf_iterator<char>());
 
-    while (std::getline(arquivo, linha)) {
-        if (linha.empty()) continue;
-
-        int usuario_id = std::stoi(linha);
-
-        std::string limiteLinha;
-        if (!std::getline(arquivo, limiteLinha)) return false;
-        double limite = std::stod(limiteLinha);
-
-        std::string dataIngressoLinha;
-        if (!std::getline(arquivo, dataIngressoLinha)) return false;
-        std::istringstream ssData(dataIngressoLinha);
-        std::vector<std::string> dataIngresso;
-        std::string parte;
-        while (ssData >> parte) dataIngresso.push_back(parte);
-
-        Cliente c(usuario_id, limite, dataIngresso);
-        clientes.push_back(c);
+    json::value jsonArray;
+    try {
+        jsonArray = json::value::parse(utility::conversions::to_string_t(conteudo));
     }
+    catch (...) {
+        return false;
+    }
+
+    if (!jsonArray.is_array()) return false;
+
+    std::lock_guard<std::mutex> lock(cliente_mutex);
+    clientes.clear();
+
+    for (const auto& item : jsonArray.as_array()) {
+        if (item.has_field(U("usuario_id")) &&
+            item.has_field(U("limite")) &&
+            item.has_field(U("data_ingresso"))) {
+
+            int usuario_id = item.at(U("usuario_id")).as_integer();
+            double limite = item.at(U("limite")).as_double();
+
+            std::vector<std::string> dataIngresso;
+            for (const auto& parte : item.at(U("data_ingresso")).as_array()) {
+                dataIngresso.push_back(utility::conversions::to_utf8string(parte.as_string()));
+            }
+
+            Cliente c(usuario_id, limite, dataIngresso);
+            clientes.push_back(c);
+        }
+    }
+
     return true;
 }
+
 // Função responsável por salvar no .xtt os dados do cliente que estamos cadastrando
 bool salvar_clientes() {
-    std::ofstream arquivo("cliente.txt");
-    if (!arquivo.is_open()) return false;
+    json::value jsonArray = json::value::array();
 
-    for (const auto& c : clientes) {
-        arquivo << c.getUsuarioId() << "\n";
-        arquivo << c.getLimiteCredito() << "\n";
+    for (size_t i = 0; i < clientes.size(); i++) {
+        const Cliente& c = clientes[i];
 
-        for (const auto& parte : c.getDataIngresso())
-            arquivo << parte << " ";
-        arquivo << "\n";
+        json::value item;
+        item[U("usuario_id")] = json::value::number(c.getUsuarioId());
+        item[U("limite")] = json::value::number(c.getLimiteCredito());
+
+        json::value data_array = json::value::array();
+        const auto& data = c.getDataIngresso();
+        for (size_t j = 0; j < data.size(); j++) {
+            data_array[j] = json::value::string(utility::conversions::to_string_t(data[j]));
+        }
+
+        item[U("data_ingresso")] = data_array;
+
+        jsonArray[i] = item;
     }
+
+    std::ofstream file("cliente.txt");
+    if (!file.is_open()) return false;
+
+    std::string json_str = utility::conversions::to_utf8string(jsonArray.serialize());
+    file << json_str;
+
     return true;
 }
-// Funlção que verifica se ha clientes cadastrados ou não no arquivo
+
 void inicializar_clientes() {
-    std::lock_guard<std::mutex> lock(clientes_mutex);
-    if (carregar_clientes()) {
-        std::cout << "Clientes carregados do arquivo.\n";
-    } else {
-        std::cout << "Nenhum cliente encontrado no arquivo.\n";
+    if (!carregar_clientes()) {
+        clientes.clear();
+        next_id = 1;
+        salvar_clientes();
     }
 }
 // Função responsável por fazer o cadastro do cliente ao chamar uma rota do tipo POST e com os parametros necessarios sendo passados no Body da requisição
@@ -74,7 +104,7 @@ void criar_cliente(const web::http::http_request& request) {
         int usuario_id = json.at(U("usuario_id")).as_integer();
 
         // Verifica se usuário existe
-        std::lock_guard<std::mutex> lock(clientes_mutex);
+        std::lock_guard<std::mutex> lock(cliente_mutex);
 
         auto usuario_it = std::find_if(usuarios.begin(), usuarios.end(),
             [usuario_id](const Usuario& u) { return u.getId() == usuario_id; });
@@ -99,52 +129,74 @@ void criar_cliente(const web::http::http_request& request) {
     }).wait();
 }
 // Função que lista todos os clientes
-void listar_clientes(const web::http::http_request& request) {
-    std::lock_guard<std::mutex> lock(clientes_mutex);
-    web::json::value resposta = web::json::value::array();
-    int idx = 0;
-    for (const auto& c : clientes) {
-        resposta[idx++] = web::json::value::object({
-            { U("usuario_id"), web::json::value::number(c.getUsuarioId()) },
-            { U("limite_credito"), web::json::value::number(c.getLimiteCredito()) }
-        });
+void listar_clientes(const http_request& request) {
+    json::value jsonArray = json::value::array();
+
+    std::lock_guard<std::mutex> lock(cliente_mutex);
+    for (size_t i = 0; i < clientes.size(); i++) {
+        const auto& c = clientes[i];
+        json::value item;
+
+        item[U("usuario_id")] = json::value::number(c.getUsuarioId());
+        item[U("limite")] = json::value::number(c.getLimiteCredito());
+
+        json::value dataArray = json::value::array();
+        const auto& data = c.getDataIngresso();
+        for (size_t j = 0; j < data.size(); j++) {
+            dataArray[j] = json::value::string(utility::conversions::to_string_t(data[j]));
+        }
+
+        item[U("data_ingresso")] = dataArray;
+
+        jsonArray[i] = item;
     }
-    request.reply(web::http::status_codes::OK, resposta);
+
+    request.reply(status_codes::OK, jsonArray);
 }
 // Função responsável por atualizar um determinado cliente, buscando o cliente pelo id
-void atualizar_cliente(const web::http::http_request& request, int usuario_id) {
-    request.extract_json().then([=](const web::json::value& json) {
-        std::lock_guard<std::mutex> lock(clientes_mutex);
-        auto it = std::find_if(clientes.begin(), clientes.end(),
-            [usuario_id](const Cliente& c) { return c.getUsuarioId() == usuario_id; });
-
-        if (it != clientes.end()) {
-            if (json.has_field(U("limite_credito"))) it->setLimiteCredito(json.at(U("limite_credito")).as_double());
-            if (json.has_field(U("data_ingresso"))) {
-                std::vector<std::string> data;
-                for (const auto& v : json.at(U("data_ingresso")).as_array())
-                    data.push_back(utility::conversions::to_utf8string(v.as_string()));
-                it->setDataIngresso(data);
-            }
-
-            salvar_clientes();
-            request.reply(web::http::status_codes::OK, U("Cliente atualizado com sucesso"));
-        } else {
-            request.reply(web::http::status_codes::NotFound, U("Cliente não encontrado"));
+void atualizar_cliente(const http_request& request, int usuario_id) {
+    request.extract_json().then([usuario_id, &request](json::value jsonBody) {
+        if (!jsonBody.has_field(U("limite")) || !jsonBody.has_field(U("data_ingresso"))) {
+            return request.reply(status_codes::BadRequest, U("Campos obrigatórios ausentes"));
         }
+
+        double novo_limite = jsonBody.at(U("limite")).as_double();
+
+        std::vector<std::string> nova_data;
+        for (const auto& parte : jsonBody.at(U("data_ingresso")).as_array()) {
+            nova_data.push_back(utility::conversions::to_utf8string(parte.as_string()));
+        }
+
+        std::lock_guard<std::mutex> lock(cliente_mutex);
+        bool encontrado = false;
+        for (auto& c : clientes) {
+            if (c.getUsuarioId() == usuario_id) {
+                c.setLimiteCredito(novo_limite);
+                c.setDataIngresso(nova_data);
+                encontrado = true;
+                break;
+            }
+        }
+
+        if (!encontrado) {
+            return request.reply(status_codes::NotFound, U("Cliente não encontrado"));
+        }
+
+        salvar_clientes();
+        return request.reply(status_codes::OK, U("Cliente atualizado com sucesso"));
     }).wait();
 }
 // Função que deleta um cliente
-void deletar_cliente(const web::http::http_request& request, int usuario_id) {
-    std::lock_guard<std::mutex> lock(clientes_mutex);
+void deletar_cliente(const http_request& request, int usuario_id) {
+    std::lock_guard<std::mutex> lock(cliente_mutex);
     auto it = std::remove_if(clientes.begin(), clientes.end(),
-        [usuario_id](const Cliente& c) { return c.getUsuarioId() == usuario_id; });
+                             [usuario_id](const Cliente& c) { return c.getUsuarioId() == usuario_id; });
 
-    if (it != clientes.end()) {
+    if (it == clientes.end()) {
+        request.reply(status_codes::NotFound, U("Cliente não encontrado"));
+    } else {
         clientes.erase(it, clientes.end());
         salvar_clientes();
-        request.reply(web::http::status_codes::OK, U("Cliente deletado com sucesso"));
-    } else {
-        request.reply(web::http::status_codes::NotFound, U("Cliente não encontrado"));
+        request.reply(status_codes::OK, U("Cliente removido com sucesso"));
     }
 }

@@ -1,0 +1,3 @@
+C:/Users/Felipe/Pictures/EDOO/Sistema-de-Locadora/back/out/build/x64-Debug/CMakeFiles/LocadoraServer.dir
+C:/Users/Felipe/Pictures/EDOO/Sistema-de-Locadora/back/out/build/x64-Debug/CMakeFiles/edit_cache.dir
+C:/Users/Felipe/Pictures/EDOO/Sistema-de-Locadora/back/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir

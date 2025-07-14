@@ -14,6 +14,8 @@ using namespace web::http;
 using namespace web::http::experimental::listener;
 
 int main() {
+
+
     // Inicializa dados carregando arquivos
     inicializar_usuarios();
     inicializar_clientes();
@@ -64,7 +66,7 @@ int main() {
         } else if (path[0] == U("genero")) {
             listar_generos(request);
         } else if (path[0] == U("genero_filme")) {
-            listar_genero_filmes(request);
+            listar_genero_filme(request);
         } else if (path[0] == U("aluguel")) { 
             listar_alugueis(request);
         } else {
@@ -105,7 +107,7 @@ int main() {
         auto path = uri::split_path(request.relative_uri().path());
 
         if (path.empty()) {
-            request.reply(status_codes::BadRequest, "Requisição sem caminho");
+            request.reply(status_codes::BadRequest, U("Requisição sem caminho"));
             return;
         }
 
@@ -114,42 +116,66 @@ int main() {
                 int id = 0;
                 try {
                     id = std::stoi(path[1]);
-                } catch (...) {
-                    request.reply(status_codes::BadRequest, "ID inválido");
+                }
+                catch (...) {
+                    request.reply(status_codes::BadRequest, U("ID inválido"));
                     return;
                 }
 
                 if (path[0] == U("usuario")) {
                     deletar_usuario(request, id);
-                } else if (path[0] == U("cliente")) {
+                }
+                else if (path[0] == U("cliente")) {
                     deletar_cliente(request, id);
-                } else if (path[0] == U("filme")) {
+                }
+                else if (path[0] == U("filme")) {
                     deletar_filme(request, id);
-                } else if (path[0] == U("genero")) {
+                }
+                else if (path[0] == U("genero")) {
                     deletar_genero(request, id);
                 }
-            } else {
-                request.reply(status_codes::BadRequest, "Formato da URL incorreto para DELETE");
             }
-        } else if (path[0] == U("genero_filme")) {
-            deletar_genero_filme(request);
-        } else if (path[0] == U("aluguel")) {  
+            else {
+                request.reply(status_codes::BadRequest, U("Formato da URL incorreto para DELETE"));
+            }
+        }
+        else if (path[0] == U("genero_filme")) {
+            if (path.size() == 3) {
+                int filme_id = 0, genero_id = 0;
+                try {
+                    filme_id = std::stoi(path[1]);
+                    genero_id = std::stoi(path[2]);
+                }
+                catch (...) {
+                    request.reply(status_codes::BadRequest, U("IDs inválidos para filme_id ou genero_id"));
+                    return;
+                }
+                deletar_genero_filme(request, filme_id, genero_id);
+            }
+            else {
+                request.reply(status_codes::BadRequest, U("Formato da URL incorreto para DELETE genero_filme. Esperado: /genero_filme/{filme_id}/{genero_id}"));
+            }
+        }
+        else if (path[0] == U("aluguel")) {
             if (path.size() == 2) {
                 int id = 0;
                 try {
                     id = std::stoi(path[1]);
-                } catch (...) {
-                    request.reply(status_codes::BadRequest, "ID inválido");
+                }
+                catch (...) {
+                    request.reply(status_codes::BadRequest, U("ID inválido"));
                     return;
                 }
                 deletar_aluguel(request, id);
-            } else {
-                request.reply(status_codes::BadRequest, "Formato da URL incorreto para DELETE");
             }
-        } else {
-            request.reply(status_codes::NotFound, "Rota DELETE não encontrada");
+            else {
+                request.reply(status_codes::BadRequest, U("Formato da URL incorreto para DELETE"));
+            }
         }
-    });
+        else {
+            request.reply(status_codes::NotFound, U("Rota DELETE não encontrada"));
+        }
+        });
 
     try {
         listener
@@ -160,8 +186,12 @@ int main() {
         while (true) {
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         std::cerr << "Erro no servidor: " << e.what() << std::endl;
+    }
+    catch (...) {
+        std::cerr << "Erro desconhecido no servidor" << std::endl;
     }
 
     return 0;

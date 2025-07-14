@@ -13,9 +13,9 @@ std::vector<Genero> generos;
 int next_genero_id = 1;
 std::mutex genero_mutex;
 
+
 void inicializar_generos() {
     if (!carregar_generos()) {
-        std::lock_guard<std::mutex> lock(genero_mutex);
         generos.clear();
         next_genero_id = 1;
         salvar_generos();

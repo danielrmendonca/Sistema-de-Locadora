@@ -106,7 +106,7 @@ void criar_aluguel(const http_request& request) {
 
             // Verificar existência do cliente
             {
-                std::lock_guard<std::mutex> lock(clientes_mutex);
+                std::lock_guard<std::mutex> lock(cliente_mutex);
                 auto itCliente = std::find_if(clientes.begin(), clientes.end(),
                     [id_cliente](const Cliente& c) { return c.getUsuarioId() == id_cliente; });
                 if (itCliente == clientes.end()) {

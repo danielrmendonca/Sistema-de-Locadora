@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
+set(CMAKE_TOOLCHAIN_FILE "C:/Users/Felipe/Videos/vcpkg/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
 project(LocadoraServer)
 
 set(CMAKE_CXX_STANDARD 17)
